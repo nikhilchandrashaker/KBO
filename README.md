@@ -12,8 +12,24 @@ pitching data, asking one question: **what actually makes a KBO team win?**
 | `02_what_wins.R` | Regress Win% on Offense/Pitching — overall and by era |
 | `03_ktpi_leaderboards.R` | Build KTPI, Balance, and Complete Score; leaderboards + scatter plot |
 | `04_pca_clustering_bonus.R` | PCA + k-means to find team "archetypes" |
+| `app.R` | Interactive Shiny dashboard — season selector → team rankings → click a team for its full breakdown |
 
-Run them in order (`01` → `04`); each writes a CSV the next one reads.
+Run `01` → `04` in order; each writes a CSV the next one reads.
+
+## Running the dashboard
+
+```r
+install.packages(c("shiny", "tidyverse", "DT"))  # first time only
+source("01_ktpi_analysis.R")
+source("03_ktpi_leaderboards.R")   # produces kbo_final.csv, which app.R needs
+shiny::runApp("app.R")
+```
+
+The app shows a season picker, a sortable team-rankings table (Offense,
+Pitching, KTPI, Balance percentiles), and — click any row — a full
+breakdown for that team: raw offensive and pitching stats, KTPI and
+percentile ranks, and a scatter plot showing where that team sat in its
+league that year.
 
 ## Method summary
 
